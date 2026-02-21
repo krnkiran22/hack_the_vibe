@@ -10,6 +10,7 @@
 
 ## 📋 Table of Contents
 
+- [Recent Updates](#-recent-updates)
 - [Project Description](#-project-description)
 - [Contract Address](#-contract-address)
 - [Problem Statement](#-problem-statement)
@@ -23,6 +24,17 @@
 - [Future Scope & Ecosystem Growth](#-future-scope--ecosystem-growth)
 - [Contributing](#-contributing)
 - [License](#-license)
+
+---
+
+## 🚀 Recent Updates
+
+- **Feb 2026**: Initial prototype migrated to the Hack the Vibe repository.
+- **Weapon Rebalancing**: Adjusted AK-47, SMG, and Sniper stats for competitive integrity.
+- **HUD Enhancement**: Added real-time mission telemetry and system status indicators.
+- **AI Persona**: Fully integrated "Sofia" AI coach with specialized gameplay analysis logic.
+- **Security**: Refactored API key management for third-party service integrations (Huddle01).
+
 
 ---
 
