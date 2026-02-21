@@ -48,6 +48,14 @@ class GitHubMCPClient:
         tools = await self.client.list_tools()
         return tools
 
+    async def health_check(self) -> bool:
+        """Verify the MCP server is reachable and responding."""
+        try:
+            tools = await self.list_available_tools()
+            return len(tools) > 0
+        except Exception:
+            return False
+
     async def create_pull_request(self, repo: str, title: str, body: str, head: str, base: str = "main"):
         """
         Invoke the MCP tool to create a pull request.
