@@ -85,28 +85,36 @@ export const Leaderboard = () => {
   const { peerIds } = usePeerIds();
   const { enableAudio, disableAudio } = useLocalAudio();
 
+  const HUDDLE_API_KEY = import.meta.env.VITE_HUDDLE01_API_KEY || "ak_oxmRVWyaH6FDZoPS";
+  const HUDDLE_ROOM_ID = import.meta.env.VITE_HUDDLE01_ROOM_ID || "xpq-dfgv-cpp";
+
   const createRoomId = async () => {
-    const response = await axios.post(
-      "https://api.huddle01.com/api/v1/create-room",
-      {
-        title: "Huddle01-Test",
-        hostWallets: ["0x324298486F9b811eD5e062275a58363d1B2E93eB"],
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "ak_oxmRVWyaH6FDZoPS",
+    try {
+      const response = await axios.post(
+        "https://api.huddle01.com/api/v1/create-room",
+        {
+          title: "HackTheVibe-Match-Lobby",
+          hostWallets: ["0x324298486F9b811eD5e062275a58363d1B2E93eB"],
         },
-      }
-    );
-    return response.data.data.roomId;
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": HUDDLE_API_KEY,
+          },
+        }
+      );
+      return response.data.data.roomId;
+    } catch (error) {
+      console.error("[Huddle01] Room creation failed:", error);
+      return HUDDLE_ROOM_ID; // Fallback to default room
+    }
   };
 
   const handleJoinRoom = async () => {
     const roomid = await createRoomId();
     const accessToken = new AccessToken({
-      apiKey: "ak_oxmRVWyaH6FDZoPS",
-      roomId: "xpq-dfgv-cpp",
+      apiKey: HUDDLE_API_KEY,
+      roomId: roomid,
       role: Role.HOST,
       permissions: {
         admin: true,
