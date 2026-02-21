@@ -7,7 +7,12 @@ import { Experience } from "./components/Experience";
 import { Leaderboard } from "./components/Leaderboard";
 import { LoadingScreen } from "./components/LoadingScreen";
 
+/**
+ * Main Application Component
+ * Renders the 3D gaming environment with physics and post-processing.
+ */
 function App() {
+  // Track performance to downgrade graphics if needed for lower-end devices
   const [downgradedPerformance, setDowngradedPerformance] = useState(false);
   return (
     <div className="root">
