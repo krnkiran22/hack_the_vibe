@@ -6,16 +6,20 @@ import { myPlayer } from "playroomkit";
 import { useSelector } from "react-redux";
 import { CharacterSoldier } from "./CharacterSoldier";
 
+/**
+ * Configuration for available player characters and their associated theme colors.
+ * Used for UI rendering and in-game character models.
+ */
 const itemsData = {
   CHARACTERS: [
-    { name: "SHADOW ELITE", color: "#000000" },
-    { name: "URBAN STRIKER", color: "#3b82f6" },
-    { name: "JUNGLE GHOST", color: "#166534" },
-    { name: "ARCTIC WOLF", color: "#f8fafc" },
-    { name: "RECON ELITE", color: "#4ade80" },
-    { name: "DESERT FOX", color: "#f59e0b" },
-    { name: "NEON REAPER", color: "#a3ff12" },
-    { name: "PLASMA VORTEX", color: "#c026d3" },
+    { name: "SHADOW ELITE", color: "#000000" }, // Stealth specialist
+    { name: "URBAN STRIKER", color: "#3b82f6" }, // Tactical operator
+    { name: "JUNGLE GHOST", color: "#166534" }, // Camouflage expert
+    { name: "ARCTIC WOLF", color: "#e2e8f0" }, // Cold-weather scout
+    { name: "RECON ELITE", color: "#22c55e" }, // Forward observer
+    { name: "DESERT FOX", color: "#fcd34d" }, // Arid terrain specialist
+    { name: "NEON REAPER", color: "#bef264" }, // Cyberpunk themed
+    { name: "PLASMA VORTEX", color: "#d946ef" }, // High-energy warrior
   ]
 };
 
