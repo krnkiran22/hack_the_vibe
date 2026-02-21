@@ -27,6 +27,7 @@ function App() {
 
         <PerformanceMonitor
           onDecline={(fps) => {
+            console.log(`[Performance] FPS dropped to ${fps}, downgrading graphics quality.`);
             setDowngradedPerformance(true);
           }}
         />
