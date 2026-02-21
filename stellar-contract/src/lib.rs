@@ -121,16 +121,9 @@ impl GameStakingContract {
             panic!("Game already finished");
         }
         
-        // Verify winner is a player in this game
-        let mut winner_found = false;
-        for player in game_match.players.iter() {
-            if player == winner {
-                winner_found = true;
-                break;
-            }
-        }
-        if !winner_found {
-            panic!("Winner not in player list");
+        // Verify winner is a player in this game using idiomatic Rust
+        if !game_match.players.iter().any(|p| p == winner) {
+            panic!("Winner address not found in active player list for this match");
         }
         
         // Calculate platform fee (5%)
