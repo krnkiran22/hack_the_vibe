@@ -1,0 +1,1 @@
+/Users/kiran/Desktop/StarkShootRoR/stellar-contract/target/wasm32-unknown-unknown/release/starkshoot_staking_contract.wasm: /Users/kiran/Desktop/StarkShootRoR/stellar-contract/src/lib.rs /Users/kiran/Desktop/StarkShootRoR/stellar-contract/src/test.rs
