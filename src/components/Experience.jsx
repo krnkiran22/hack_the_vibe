@@ -94,9 +94,9 @@ export const Experience = ({ downgradedPerformance = false }) => {
         if (walletState) {
           try {
             const parsedState = JSON.parse(walletState);
-            username = parsedState?.state?.username || "Unknown Soldier";
+            username = parsedState?.state?.username || parsedState?.address?.substring(0, 6) || "Unknown Operator";
           } catch (e) {
-            console.error("Failed to parse wallet state:", e);
+            console.error("[Experience] Failed to parse wallet state, using fallback name:", e);
           }
         }
 
