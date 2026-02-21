@@ -57,12 +57,6 @@ export async function getSDEXQuote(
       .strictSendPaths(fromAsset, amount, [toAsset])
       .call();
 
-    console.log('SDEX paths response:', {
-      recordsCount: pathsResponse.records.length,
-      fromAsset: fromAsset.isNative() ? 'XLM' : `${fromAsset.getCode()}:${fromAsset.getIssuer()}`,
-      toAsset: toAsset.isNative() ? 'XLM' : `${toAsset.getCode()}:${toAsset.getIssuer()}`,
-      amount
-    });
 
     if (pathsResponse.records.length === 0) {
       throw new Error(
