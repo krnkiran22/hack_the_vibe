@@ -1,8 +1,8 @@
 {
-  "name": "stellar-strike",
+  "name": "hack-the-vibe",
   "private": true,
   "version": "1.0.0",
-  "description": "Epic Battle Royale Game with Stellar Blockchain Integration",
+  "description": "A high-performance web-native 3D multiplayer survival shooter integrated with Stellar/Soroban blockchain and AI coaching.",
   "type": "module",
   "scripts": {
     "dev": "vite",
