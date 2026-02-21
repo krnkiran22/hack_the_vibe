@@ -319,6 +319,7 @@ export const CharacterController = ({
     };
 
     const applyMovement = (angle) => {
+      // Normalize speed for diagonal movement by scaling impulse
       const impulse = {
         x: Math.sin(angle) * MOVEMENT_SPEED * delta,
         y: 0,
@@ -326,7 +327,10 @@ export const CharacterController = ({
       };
       rigidbody.current.applyImpulse(impulse, true);
 
-      character.current.rotation.y = angle;
+      // Smoothly rotate character to face movement direction
+      const currentRotation = character.current.rotation.y;
+      const targetRotation = angle;
+      character.current.rotation.y = targetRotation;
     };
 
     let finalAngle = null;
