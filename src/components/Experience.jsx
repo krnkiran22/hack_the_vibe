@@ -1,4 +1,6 @@
-import { Environment } from "@react-three/drei";
+import { useEffect, useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   Joystick,
   insertCoin,
@@ -10,9 +12,8 @@ import {
   setState,
   getState,
 } from "playroomkit";
-import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { Environment } from "@react-three/drei";
+
 import { Bullet } from "./Bullet";
 import { BulletHit } from "./BulletHit";
 import { CharacterController } from "./CharacterController";
