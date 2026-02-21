@@ -369,7 +369,11 @@ export const Leaderboard = () => {
               <div className={`text-4xl font-black italic tracking-tighter ${timer < 60 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
                 {formatTime(timer ?? time ?? 60)}
               </div>
-              <div className="h-0.5 w-full bg-white/10 mt-1 relative overflow-hidden rounded-full">
+              <div className="flex justify-between w-full mb-1">
+                <span className="text-[7px] text-white/40 font-mono">STATUS: {timer > 0 ? 'ACTIVE_ENGAGEMENT' : 'EXTRACTION_READY'}</span>
+                <span className="text-[7px] text-white/40 font-mono">NET_SYNC: OK</span>
+              </div>
+              <div className="h-0.5 w-full bg-white/10 relative overflow-hidden rounded-full">
                 <div className={`absolute inset-0 ${timer < 60 ? 'bg-red-500' : 'bg-lime'}`} style={{ width: `${(timer / (time || 60)) * 100}%` }}></div>
               </div>
             </div>
