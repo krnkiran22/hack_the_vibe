@@ -21,6 +21,15 @@ interface SDEXQuote {
 }
 
 /**
+ * Get the Horizon server URL for the specified network
+ */
+function getHorizonUrl(network: 'TESTNET' | 'PUBLIC'): string {
+  return network === 'TESTNET'
+    ? 'https://horizon-testnet.stellar.org'
+    : 'https://horizon.stellar.org';
+}
+
+/**
  * Get SDEX quote for swap using path payments
  * @param fromAsset - Source asset (e.g., USDC)
  * @param toAsset - Destination asset (e.g., XLM)
@@ -34,16 +43,13 @@ export async function getSDEXQuote(
   network: 'TESTNET' | 'PUBLIC' = 'TESTNET'
 ): Promise<SDEXQuote> {
   try {
-    const serverUrl = network === 'TESTNET'
-      ? 'https://horizon-testnet.stellar.org'
-      : 'https://horizon.stellar.org';
-    
+    const serverUrl = getHorizonUrl(network);
     const server = new StellarSdk.Horizon.Server(serverUrl);
 
-    console.log('🔍 Getting SDEX quote:', { 
+    console.log('🔍 Getting SDEX quote:', {
       from: fromAsset.isNative() ? 'XLM' : `${fromAsset.getCode()}:${fromAsset.getIssuer()}`,
       to: toAsset.isNative() ? 'XLM' : `${toAsset.getCode()}:${toAsset.getIssuer()}`,
-      amount 
+      amount
     });
 
     // Find strict send path (best rate for exact input amount)
@@ -77,7 +83,7 @@ export async function getSDEXQuote(
     return {
       inputAmount: amount,
       outputAmount: bestPath.destination_amount,
-      path: bestPath.path.map((asset: any) => 
+      path: bestPath.path.map((asset: any) =>
         asset.asset_type === 'native' ? 'XLM' : `${asset.asset_code}:${asset.asset_issuer}`
       ),
       priceImpact: calculatePriceImpact(amount, bestPath.destination_amount, fromAsset, toAsset),
@@ -114,10 +120,7 @@ export async function buildSDEXSwap(
       passphrase: network === 'TESTNET' ? 'Test SDF Network ; September 2015' : 'Public Global Stellar Network ; September 2015'
     });
 
-    const serverUrl = network === 'TESTNET'
-      ? 'https://horizon-testnet.stellar.org'
-      : 'https://horizon.stellar.org';
-    
+    const serverUrl = getHorizonUrl(network);
     const server = new StellarSdk.Horizon.Server(serverUrl);
     const networkPassphrase = network === 'TESTNET'
       ? StellarSdk.Networks.TESTNET
@@ -130,15 +133,15 @@ export async function buildSDEXSwap(
     try {
       account = await server.loadAccount(userPublicKey);
       console.log('✅ Account loaded successfully');
-      
+
       // Check if user has trustline for destination asset (if not native)
       if (!toAsset.isNative()) {
-        const hasTrustline = account.balances.some((balance: any) => 
-          balance.asset_type !== 'native' && 
-          balance.asset_code === toAsset.getCode() && 
+        const hasTrustline = account.balances.some((balance: any) =>
+          balance.asset_type !== 'native' &&
+          balance.asset_code === toAsset.getCode() &&
           balance.asset_issuer === toAsset.getIssuer()
         );
-        
+
         if (!hasTrustline) {
           throw new Error(
             `Missing trustline for ${toAsset.getCode()}:${toAsset.getIssuer()}. ` +
@@ -194,8 +197,8 @@ export async function buildSDEXSwap(
           destination: userPublicKey, // Send to self
           destAsset: toAsset,
           destMin: formatStellarAmount(minAmount),
-          path: bestPath.path.map((asset: any) => 
-            asset.asset_type === 'native' 
+          path: bestPath.path.map((asset: any) =>
+            asset.asset_type === 'native'
               ? StellarSdk.Asset.native()
               : new StellarSdk.Asset(asset.asset_code, asset.asset_issuer)
           ),
@@ -210,7 +213,7 @@ export async function buildSDEXSwap(
       matchesTestnet: transaction.networkPassphrase === StellarSdk.Networks.TESTNET,
       matchesPublic: transaction.networkPassphrase === StellarSdk.Networks.PUBLIC
     });
-    
+
     return transaction.toXDR();
   } catch (error: any) {
     console.error('SDEX swap build error:', error);
@@ -222,18 +225,18 @@ export async function buildSDEXSwap(
  * Calculate price impact for a swap
  */
 function calculatePriceImpact(
-  inputAmount: string, 
-  outputAmount: string, 
-  fromAsset: StellarSdk.Asset, 
+  inputAmount: string,
+  outputAmount: string,
+  fromAsset: StellarSdk.Asset,
   toAsset: StellarSdk.Asset
 ): number {
   // Simple price impact calculation
   // In production, you'd want to compare against current market rate
   const inputNum = parseFloat(inputAmount);
   const outputNum = parseFloat(outputAmount);
-  
+
   if (inputNum === 0 || outputNum === 0) return 0;
-  
+
   // For demonstration, assume 1:1 rate and calculate deviation
   const rate = outputNum / inputNum;
   return Math.abs((1 - rate) * 100);
