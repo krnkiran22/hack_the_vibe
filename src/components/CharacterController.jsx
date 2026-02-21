@@ -46,21 +46,24 @@ const WEAPONS = [
   "Sniper_2",
 ];
 
+/**
+ * Defined properties for each weapon type including damage, speed, and spread.
+ */
 const BULLET_PROPERTIES = {
   "GrenadeLauncher": { damage: 35, speed: 1.2, size: 0.5, range: 150, spread: 0.05, bullets: 8 },
-  "AK": { damage: 10, speed: 1.5, size: 0.2, range: 100, spread: 0.01, bullets: 1 },
+  "AK": { damage: 12, speed: 1.5, size: 0.2, range: 120, spread: 0.012, bullets: 1 },
   "Knife_1": { damage: 25, speed: 1, size: 0.3, range: 5, spread: 0, bullets: 0 },
   "Knife_2": { damage: 30, speed: 1, size: 0.3, range: 5, spread: 0, bullets: 0 },
   "Pistol": { damage: 15, speed: 1.5, size: 0.2, range: 80, spread: 0.02, bullets: 1 },
-  "Revolver": { damage: 20, speed: 1.4, size: 0.25, range: 90, spread: 0.01, bullets: 1 },
+  "Revolver": { damage: 22, speed: 1.4, size: 0.25, range: 90, spread: 0.015, bullets: 1 },
   "Revolver_Small": { damage: 18, speed: 1.4, size: 0.2, range: 80, spread: 0.02, bullets: 1 },
-  "RocketLauncher": { damage: 50, speed: 1, size: 0.6, range: 200, spread: 0.05, bullets: 5 },
+  "RocketLauncher": { damage: 55, speed: 1, size: 0.6, range: 200, spread: 0.05, bullets: 5 },
   "ShortCannon": { damage: 40, speed: 1, size: 0.5, range: 120, spread: 0.05, bullets: 1 },
-  "SMG": { damage: 8, speed: 1.6, size: 0.15, range: 90, spread: 0.02, bullets: 1 },
-  "Shotgun": { damage: 6, speed: 1.2, size: 0.2, range: 30, spread: 0.2, bullets: 3 },
+  "SMG": { damage: 9, speed: 1.6, size: 0.15, range: 95, spread: 0.025, bullets: 1 },
+  "Shotgun": { damage: 7, speed: 1.2, size: 0.2, range: 35, spread: 0.18, bullets: 3 },
   "Shovel": { damage: 20, speed: 1, size: 0.35, range: 3, spread: 0, bullets: 0 },
-  "Sniper": { damage: 25, speed: 2, size: 0.4, range: 300, spread: 0, bullets: 1 },
-  "Sniper_2": { damage: 30, speed: 2, size: 0.4, range: 300, spread: 0, bullets: 1 },
+  "Sniper": { damage: 30, speed: 2, size: 0.4, range: 350, spread: 0, bullets: 1 },
+  "Sniper_2": { damage: 35, speed: 2, size: 0.4, range: 350, spread: 0, bullets: 1 },
 };
 
 
