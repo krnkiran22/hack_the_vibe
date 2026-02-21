@@ -14,6 +14,10 @@ app = Flask(__name__)
 # Enable CORS for all routes and origins
 CORS(app, resources={r"/*": {"origins": "*"}})
     
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "healthy", "service": "agentic_backend"}), 200
+
 conversation_history = {}
 
 @app.route('/chat', methods=['GET'])
